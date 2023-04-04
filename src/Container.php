@@ -65,10 +65,7 @@ final class Container implements ContainerInterface
 
     public function set(string $id, $value)
     {
-        // @todo
-        // To really match pimple this should probably be a test for invokable objects...
-        // pimple doesn't allow all callables - only closures and invokables
-        if (is_callable($value)) {
+        if (is_object($value) && method_exists($value, '__invoke')) {
             $value = new Definition($value);
         }
 

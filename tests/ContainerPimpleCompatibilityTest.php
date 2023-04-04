@@ -184,8 +184,6 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testGlobalFunctionNameAsParameterValue()
     {
-        $this->markTestSkipped('Need to revisit...');
-
         $container = new Container();
         $container->set('global_function', 'strlen');
         $this->assertSame('strlen', $container->get('global_function'));

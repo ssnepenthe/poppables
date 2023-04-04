@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace Poppables;
 
 if (! function_exists(__NAMESPACE__ . '\\extend')) {
-    function extend($callable)
+    function extend($invokable)
     {
-        return new Extend($callable);
+        return new Extend($invokable);
     }
 }
 
 if (! function_exists(__NAMESPACE__ . '\\factory')) {
-    function factory($callable)
+    function factory($invokable)
     {
-        return new Factory($callable);
+        return new Factory($invokable);
     }
 }
 
 if (! function_exists(__NAMESPACE__ . '\\protect')) {
-    function protect($callable)
+    function protect($invokable)
     {
-        return new Protect($callable);
+        return new Protect($invokable);
     }
 }

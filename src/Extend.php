@@ -8,15 +8,15 @@ use Pimple\Container;
 
 final class Extend implements Poppable
 {
-    private $callable;
+    private $invokable;
 
-    public function __construct($callable)
+    public function __construct($invokable)
     {
-        $this->callable = Assert::invokable($callable);
+        $this->invokable = Assert::invokable($invokable);
     }
 
     public function pop(string $id, Container $pimple)
     {
-        $pimple->extend($id, new ExtendInvokable($this->callable));
+        $pimple->extend($id, new ExtendInvokable($this->invokable));
     }
 }

@@ -50,7 +50,7 @@ final class Container implements ContainerInterface
         $raw = $this->pimple->raw($id);
 
         if ($raw instanceof Wrapped) {
-            return $raw->getCallable();
+            return $raw->getInvokable();
         }
 
         return $raw;

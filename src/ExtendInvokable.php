@@ -7,20 +7,20 @@ use Psr\Container\ContainerInterface;
 
 class ExtendInvokable implements Wrapped
 {
-    private $callable;
+    private $invokable;
 
-    public function __construct($callable)
+    public function __construct($invokable)
     {
-        $this->callable = Assert::invokable($callable);
+        $this->invokable = Assert::invokable($invokable);
     }
 
     public function __invoke($resolved, Container $pimple)
     {
-        return ($this->callable)($resolved, $pimple[ContainerInterface::class]);
+        return ($this->invokable)($resolved, $pimple[ContainerInterface::class]);
     }
 
-    public function getCallable()
+    public function getInvokable()
     {
-        return $this->callable;
+        return $this->invokable;
     }
 }

@@ -7,20 +7,20 @@ use Psr\Container\ContainerInterface;
 
 final class DefinitionInvokable implements Wrapped
 {
-    private $callable;
+    private $invokable;
 
-    public function __construct($callable)
+    public function __construct($invokable)
     {
-        $this->callable = Assert::invokable($callable);
+        $this->invokable = Assert::invokable($invokable);
     }
 
     public function __invoke(Container $pimple)
     {
-        return ($this->callable)($pimple[ContainerInterface::class]);
+        return ($this->invokable)($pimple[ContainerInterface::class]);
     }
 
-    public function getCallable()
+    public function getInvokable()
     {
-        return $this->callable;
+        return $this->invokable;
     }
 }

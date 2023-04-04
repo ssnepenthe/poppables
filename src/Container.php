@@ -65,12 +65,12 @@ final class Container implements ContainerInterface
 
     public function set(string $id, $value)
     {
-        if (is_object($value) && method_exists($value, '__invoke')) {
-            $value = new Definition($value);
-        }
-
         if (! $value instanceof Poppable) {
-            $value = new Parameter($value);
+            if (is_object($value) && method_exists($value, '__invoke')) {
+                $value = new Definition($value);
+            } else {
+                $value = new Parameter($value);
+            }
         }
 
         $value->pop($id, $this->pimple);

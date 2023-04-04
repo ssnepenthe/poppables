@@ -2,7 +2,7 @@
 
 namespace Poppables;
 
-interface Invokable
+interface Wrapped
 {
     public function getCallable(): callable;
 }

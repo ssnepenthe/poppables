@@ -5,7 +5,7 @@ namespace Poppables;
 use Pimple\Container;
 use Psr\Container\ContainerInterface;
 
-final class DefinitionInvokable implements Invokable
+final class DefinitionInvokable implements Wrapped
 {
     private $callable;
 

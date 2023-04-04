@@ -72,19 +72,11 @@ final class Container implements ContainerInterface
             $value = new Definition($value);
         }
 
-        // @todo
-        // if (! $value instanceof Poppable) {
-        //     $value = new Raw($value);
-        // }
-
-        // $value->pop($id, $this->pimple);
-
-        if ($value instanceof Poppable) {
-            $value->pop($id, $this->pimple);
-        } else {
-            // @todo implement as "raw" poppable or something similar?
-            $this->pimple[$id] = $value;
+        if (! $value instanceof Poppable) {
+            $value = new Parameter($value);
         }
+
+        $value->pop($id, $this->pimple);
 
         // @todo return?
     }

@@ -28,6 +28,10 @@ namespace Poppables\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Poppables\Container;
+use Poppables\Exception\ExpectedInvokable;
+use Poppables\Exception\FrozenService;
+use Poppables\Exception\InvalidServiceIdentifier;
+use Poppables\Exception\UnknownIdentifier;
 use Poppables\ServiceProvider;
 use Psr\Container\ContainerInterface;
 
@@ -111,7 +115,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testOffsetGetValidatesKeyIsPresent()
     {
-        $this->expectException(\Pimple\Exception\UnknownIdentifierException::class);
+        $this->expectException(UnknownIdentifier::class);
         $this->expectExceptionMessage('Identifier "foo" is not defined.');
 
         $container = new Container();
@@ -213,7 +217,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testRawValidatesKeyIsPresent()
     {
-        $this->expectException(\Pimple\Exception\UnknownIdentifierException::class);
+        $this->expectException(UnknownIdentifier::class);
         $this->expectExceptionMessage('Identifier "foo" is not defined.');
 
         $container = new Container();
@@ -290,7 +294,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testExtendValidatesKeyIsPresent()
     {
-        $this->expectException(\Pimple\Exception\UnknownIdentifierException::class);
+        $this->expectException(UnknownIdentifier::class);
         $this->expectExceptionMessage('Identifier "foo" is not defined.');
 
         $container = new Container();
@@ -344,9 +348,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
      */
     public function testFactoryFailsForInvalidServiceDefinitions($service)
     {
-        $this->markTestSkipped('Test is redundant due to use of native php types');
-
-        $this->expectException(\Pimple\Exception\ExpectedInvokableException::class);
+        $this->expectException(ExpectedInvokable::class);
         $this->expectExceptionMessage('Service definition is not a Closure or invokable object.');
 
         factory($service);
@@ -358,8 +360,6 @@ class ContainerPimpleCompatibilityTest extends TestCase
      */
     public function testLegacyFactoryFailsForInvalidServiceDefinitions($service)
     {
-        $this->markTestSkipped('Test is redundant due to use of native php types');
-
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Service definition is not a Closure or invokable object.');
 
@@ -371,9 +371,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
      */
     public function testProtectFailsForInvalidServiceDefinitions($service)
     {
-        $this->markTestSkipped('Test is redundant due to use of native php types');
-
-        $this->expectException(\Pimple\Exception\ExpectedInvokableException::class);
+        $this->expectException(ExpectedInvokable::class);
         $this->expectExceptionMessage('Callable is not a Closure or invokable object.');
 
         protect($service);
@@ -385,8 +383,6 @@ class ContainerPimpleCompatibilityTest extends TestCase
      */
     public function testLegacyProtectFailsForInvalidServiceDefinitions($service)
     {
-        $this->markTestSkipped('Test is redundant due to use of native php types');
-
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Callable is not a Closure or invokable object.');
 
@@ -398,7 +394,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
      */
     public function testExtendFailsForKeysNotContainingServiceDefinitions($service)
     {
-        $this->expectException(\Pimple\Exception\InvalidServiceIdentifierException::class);
+        $this->expectException(InvalidServiceIdentifier::class);
         $this->expectExceptionMessage('Identifier "foo" does not contain an object definition.');
 
         $container = new Container();
@@ -445,9 +441,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
      */
     public function testExtendFailsForInvalidServiceDefinitions($service)
     {
-        $this->markTestSkipped('Test is redundant due to use of native php types');
-
-        $this->expectException(\Pimple\Exception\ExpectedInvokableException::class);
+        $this->expectException(ExpectedInvokable::class);
         $this->expectExceptionMessage('Extension service definition is not a Closure or invokable object.');
 
         $container = new Container();
@@ -462,8 +456,6 @@ class ContainerPimpleCompatibilityTest extends TestCase
      */
     public function testLegacyExtendFailsForInvalidServiceDefinitions($service)
     {
-        $this->markTestSkipped('Test is redundant due to use of native php types');
-
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Extension service definition is not a Closure or invokable object.');
 
@@ -475,7 +467,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testExtendFailsIfFrozenServiceIsNonInvokable()
     {
-        $this->expectException(\Pimple\Exception\FrozenServiceException::class);
+        $this->expectException(FrozenService::class);
         $this->expectExceptionMessage('Cannot override frozen service "foo".');
 
         $container = new Container();
@@ -490,7 +482,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testExtendFailsIfFrozenServiceIsInvokable()
     {
-        $this->expectException(\Pimple\Exception\FrozenServiceException::class);
+        $this->expectException(FrozenService::class);
         $this->expectExceptionMessage('Cannot override frozen service "foo".');
 
         $container = new Container();
@@ -546,7 +538,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testOverridingServiceAfterFreeze()
     {
-        $this->expectException(\Pimple\Exception\FrozenServiceException::class);
+        $this->expectException(FrozenService::class);
         $this->expectExceptionMessage('Cannot override frozen service "foo".');
 
         $container = new Container();

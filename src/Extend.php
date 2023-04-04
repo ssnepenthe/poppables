@@ -12,7 +12,7 @@ final class Extend implements Poppable
 
     public function __construct($invokable)
     {
-        $this->invokable = Assert::invokable($invokable);
+        $this->invokable = Assert::invokable($invokable, 'Extension service definition');
     }
 
     public function pop(string $id, Container $pimple)

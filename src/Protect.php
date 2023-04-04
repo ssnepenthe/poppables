@@ -12,7 +12,7 @@ final class Protect implements Poppable
 
     public function __construct($invokable)
     {
-        $this->invokable = Assert::invokable($invokable);
+        $this->invokable = Assert::invokable($invokable, 'Callable');
     }
 
     public function pop(string $id, Container $pimple)

@@ -12,7 +12,7 @@ final class Factory implements Poppable
 
     public function __construct($invokable)
     {
-        $this->invokable = Assert::invokable($invokable);
+        $this->invokable = Assert::invokable($invokable, 'Service definition');
     }
 
     public function pop(string $id, Container $pimple)

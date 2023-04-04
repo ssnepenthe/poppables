@@ -2,14 +2,14 @@
 
 namespace Poppables;
 
-use InvalidArgumentException;
+use Poppables\Exception\ExpectedInvokable;
 
 final class Assert
 {
-    public static function invokable($value)
+    public static function invokable($value, string $descriptor = 'Value')
     {
         if (! (is_object($value) && method_exists($value, '__invoke'))) {
-            throw new InvalidArgumentException('@todo This should probably be a custom validation exception or similar');
+            throw new ExpectedInvokable("{$descriptor} is not a Closure or invokable object.");
         }
 
         return $value;

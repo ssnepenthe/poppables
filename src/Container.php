@@ -5,6 +5,14 @@ declare(strict_types=1);
 namespace Poppables;
 
 use Pimple\Container as PimpleContainer;
+use Pimple\Exception\ExpectedInvokableException;
+use Pimple\Exception\FrozenServiceException;
+use Pimple\Exception\InvalidServiceIdentifierException;
+use Pimple\Exception\UnknownIdentifierException;
+use Poppables\Exception\ExpectedInvokable;
+use Poppables\Exception\FrozenService;
+use Poppables\Exception\InvalidServiceIdentifier;
+use Poppables\Exception\UnknownIdentifier;
 use Psr\Container\ContainerInterface;
 use RuntimeException;
 
@@ -31,8 +39,11 @@ final class Container implements ContainerInterface
 
     public function get(string $id)
     {
-        // @todo catch and rethrow exceptions?
-        return $this->pimple[$id];
+        try {
+            return $this->pimple[$id];
+        } catch (UnknownIdentifierException $e) {
+            throw new UnknownIdentifier($e->getMessage());
+        }
     }
 
     public function has(string $id): bool
@@ -47,7 +58,11 @@ final class Container implements ContainerInterface
 
     public function raw(string $id)
     {
-        $raw = $this->pimple->raw($id);
+        try {
+            $raw = $this->pimple->raw($id);
+        } catch (UnknownIdentifierException $e) {
+            throw new UnknownIdentifier($e->getMessage());
+        }
 
         if ($raw instanceof Wrapped) {
             return $raw->getInvokable();
@@ -73,7 +88,17 @@ final class Container implements ContainerInterface
             }
         }
 
-        $value->pop($id, $this->pimple);
+        try {
+            $value->pop($id, $this->pimple);
+        } catch (ExpectedInvokableException $e) {
+            throw new ExpectedInvokable($e->getMessage());
+        } catch (FrozenServiceException $e) {
+            throw new FrozenService($e->getMessage());
+        } catch (InvalidServiceIdentifierException $e) {
+            throw new InvalidServiceIdentifier($e->getMessage());
+        } catch (UnknownIdentifierException $e) {
+            throw new UnknownIdentifier($e->getMessage());
+        }
 
         // @todo return?
     }

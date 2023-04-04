@@ -16,7 +16,6 @@ use Poppables\Exception\UnknownIdentifier;
 use Psr\Container\ContainerInterface;
 use RuntimeException;
 
-// @todo implement arrayaccess?
 final class Container implements ContainerInterface
 {
     private PimpleContainer $pimple;

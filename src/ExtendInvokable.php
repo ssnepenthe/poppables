@@ -9,9 +9,9 @@ class ExtendInvokable implements Wrapped
 {
     private $callable;
 
-    public function __construct(callable $callable)
+    public function __construct($callable)
     {
-        $this->callable = $callable;
+        $this->callable = Assert::invokable($callable);
     }
 
     public function __invoke($resolved, Container $pimple)
@@ -19,7 +19,7 @@ class ExtendInvokable implements Wrapped
         return ($this->callable)($resolved, $pimple[ContainerInterface::class]);
     }
 
-    public function getCallable(): callable
+    public function getCallable()
     {
         return $this->callable;
     }

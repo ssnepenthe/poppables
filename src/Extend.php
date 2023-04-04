@@ -10,9 +10,9 @@ final class Extend implements Poppable
 {
     private $callable;
 
-    public function __construct(callable $callable)
+    public function __construct($callable)
     {
-        $this->callable = $callable;
+        $this->callable = Assert::invokable($callable);
     }
 
     public function pop(string $id, Container $pimple)

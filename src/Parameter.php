@@ -4,7 +4,7 @@ namespace Poppables;
 
 use Pimple\Container;
 
-class Parameter implements Poppable
+final class Parameter implements Poppable
 {
     private $value;
 

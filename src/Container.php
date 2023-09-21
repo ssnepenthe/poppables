@@ -92,14 +92,10 @@ final class Container implements ContainerInterface
         } catch (UnknownIdentifierException $e) {
             throw new UnknownIdentifier($e->getMessage());
         }
-
-        // @todo return?
     }
 
     public function unset(string $id)
     {
         unset($this->pimple[$id]);
     }
-
-    // @todo service locator and iterator implementations?
 }

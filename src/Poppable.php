@@ -8,5 +8,5 @@ use Pimple\Container;
 
 interface Poppable
 {
-    public function pop(string $id, Container $pimple); // @todo return the modified closure?
+    public function pop(string $id, Container $pimple);
 }

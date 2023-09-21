@@ -143,8 +143,6 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testUnset()
     {
-        $this->markTestSkipped('Unset not yet implemented');
-
         $container = new Container();
         $container->set('param', 'value');
         $container->set('service', function () {
@@ -573,8 +571,6 @@ class ContainerPimpleCompatibilityTest extends TestCase
 
     public function testRemovingServiceAfterFreeze()
     {
-        $this->markTestSkipped('Unset not yet implemented');
-
         $container = new Container();
         $container->set('foo', function () {
             return 'foo';

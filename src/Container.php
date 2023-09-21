@@ -102,5 +102,10 @@ final class Container implements ContainerInterface
         // @todo return?
     }
 
+    public function unset(string $id)
+    {
+        unset($this->pimple[$id]);
+    }
+
     // @todo service locator and iterator implementations?
 }

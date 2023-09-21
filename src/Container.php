@@ -20,20 +20,14 @@ final class Container implements ContainerInterface
 {
     private PimpleContainer $pimple;
 
-    public function __construct(array $values = [], ?PimpleContainer $pimple = null)
+    public function __construct(array $values = [])
     {
-        // @todo Should we really allow user to provide a container?
-        $this->pimple = $pimple ?: new PimpleContainer();
-
-        if (isset($this->pimple[ContainerInterface::class])) {
+        if (array_key_exists(ContainerInterface::class, $values)) {
             throw new RuntimeException('@todo');
         }
 
+        $this->pimple = new PimpleContainer($values);
         $this->pimple[ContainerInterface::class] = $this;
-
-        foreach ($values as $key => $value) {
-            $this->set($key, $value);
-        }
     }
 
     public function get(string $id)

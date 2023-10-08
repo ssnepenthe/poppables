@@ -2,7 +2,7 @@
 
 Unnecessary abstraction around the pimple di container in an attempt to normalize it to the psr container interface.
 
-This has been written for fun/out of curiosity and probably shouldn't actually be used for anthing...
+This has been written for fun/out of curiosity and probably shouldn't actually be used for anything...
 
 ## Installation
 

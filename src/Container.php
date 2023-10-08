@@ -84,13 +84,13 @@ final class Container implements ContainerInterface
         try {
             $value->pop($id, $this->pimple);
         } catch (ExpectedInvokableException $e) {
-            throw new ExpectedInvokable($e->getMessage());
+            throw new ExpectedInvokable($e->getMessage(), $e->getCode(), $e);
         } catch (FrozenServiceException $e) {
-            throw new FrozenService($e->getMessage());
+            throw new FrozenService($e->getMessage(), $e->getCode(), $e);
         } catch (InvalidServiceIdentifierException $e) {
-            throw new InvalidServiceIdentifier($e->getMessage());
+            throw new InvalidServiceIdentifier($e->getMessage(), $e->getCode(), $e);
         } catch (UnknownIdentifierException $e) {
-            throw new UnknownIdentifier($e->getMessage());
+            throw new UnknownIdentifier($e->getMessage(), $e->getCode(), $e);
         }
     }
 

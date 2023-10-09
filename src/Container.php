@@ -18,7 +18,7 @@ use Psr\Container\ContainerInterface;
 
 final class Container implements ContainerInterface
 {
-    private PimpleContainer $pimple;
+    private $pimple;
 
     public function __construct(array $values = [])
     {

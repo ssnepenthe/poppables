@@ -73,6 +73,10 @@ final class Container implements ContainerInterface
 
     public function set(string $id, $value)
     {
+        if ($id === ContainerInterface::class) {
+            throw new InvalidArgumentException('Cannot set value for reserved identifier ' . ContainerInterface::class);
+        }
+
         if (! $value instanceof Poppable) {
             if (is_object($value) && method_exists($value, '__invoke')) {
                 $value = new Definition($value);
@@ -96,6 +100,10 @@ final class Container implements ContainerInterface
 
     public function unset(string $id)
     {
+        if ($id === ContainerInterface::class) {
+            throw new InvalidArgumentException('Cannot unset value for reserved identifier ' . ContainerInterface::class);
+        }
+
         unset($this->pimple[$id]);
     }
 }

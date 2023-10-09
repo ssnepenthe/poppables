@@ -264,32 +264,6 @@ class ContainerPimpleCompatibilityTest extends TestCase
         $this->assertNotSame($serviceOne->value, $serviceTwo->value);
     }
 
-    public function testExtendDoesNotLeakWithFactories()
-    {
-        $this->markTestSkipped('Not necessary to test pimple internals.');
-
-        if (\extension_loaded('pimple')) {
-            $this->markTestSkipped('Pimple extension does not support this test');
-        }
-        $pimple = new Container();
-
-        $pimple['foo'] = $pimple->factory(function () {
-            return;
-        });
-        $pimple['foo'] = $pimple->extend('foo', function ($foo, $pimple) {
-            return;
-        });
-        unset($pimple['foo']);
-
-        $p = new \ReflectionProperty($pimple, 'values');
-        $p->setAccessible(true);
-        $this->assertEmpty($p->getValue($pimple));
-
-        $p = new \ReflectionProperty($pimple, 'factories');
-        $p->setAccessible(true);
-        $this->assertCount(0, $p->getValue($pimple));
-    }
-
     public function testExtendValidatesKeyIsPresent()
     {
         $this->expectException(UnknownIdentifier::class);

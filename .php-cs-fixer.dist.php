@@ -8,6 +8,7 @@ return (new Config())
     ->setRules([
         '@PSR12' => true,
         'declare_strict_types' => true,
+        'no_unused_imports' => true,
     ])
     ->setFinder(
         Finder::create()

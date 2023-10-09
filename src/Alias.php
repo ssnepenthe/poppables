@@ -17,6 +17,8 @@ final class Alias implements Poppable
 
     public function pop(string $id, Container $pimple)
     {
-        $pimple[$id] = $pimple->factory(fn (Container $pimple) => $pimple[$this->originalId]);
+        $pimple[$id] = $pimple->factory(function (Container $pimple) {
+            return $pimple[$this->originalId];
+        });
     }
 }

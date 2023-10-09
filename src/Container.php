@@ -35,7 +35,7 @@ final class Container implements ContainerInterface
         try {
             return $this->pimple[$id];
         } catch (UnknownIdentifierException $e) {
-            throw new UnknownIdentifier($e->getMessage());
+            throw new UnknownIdentifier($e->getMessage(), 0, $e);
         }
     }
 
@@ -54,7 +54,7 @@ final class Container implements ContainerInterface
         try {
             $raw = $this->pimple->raw($id);
         } catch (UnknownIdentifierException $e) {
-            throw new UnknownIdentifier($e->getMessage());
+            throw new UnknownIdentifier($e->getMessage(), 0, $e);
         }
 
         if ($raw instanceof Wrapped) {

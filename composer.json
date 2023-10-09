@@ -1,5 +1,6 @@
 {
     "name": "ssnepenthe/poppables",
+    "description": "Attempts to normalize the Pimple DI container to the PSR container interface",
     "license": "MIT",
     "autoload": {
         "psr-4": {

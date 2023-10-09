@@ -8,7 +8,7 @@ use Pimple\Container;
 
 final class Alias implements Poppable
 {
-    private string $originalId;
+    private $originalId;
 
     public function __construct(string $originalId)
     {

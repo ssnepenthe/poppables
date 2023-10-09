@@ -113,7 +113,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
         $this->assertSame($params['param'], $container->get('param'));
     }
 
-    public function testOffsetGetValidatesKeyIsPresent()
+    public function testGetValidatesKeyIsPresent()
     {
         $this->expectException(UnknownIdentifier::class);
         $this->expectExceptionMessage('Identifier "foo" is not defined.');
@@ -125,7 +125,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
     /**
      * @group legacy
      */
-    public function testLegacyOffsetGetValidatesKeyIsPresent()
+    public function testLegacyGetValidatesKeyIsPresent()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Identifier "foo" is not defined.');
@@ -134,7 +134,7 @@ class ContainerPimpleCompatibilityTest extends TestCase
         echo $container->get('foo');
     }
 
-    public function testOffsetGetHonorsNullValues()
+    public function testGetHonorsNullValues()
     {
         $container = new Container();
         $container->set('foo', null);

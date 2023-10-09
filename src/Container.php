@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Poppables;
 
+use InvalidArgumentException;
 use Pimple\Container as PimpleContainer;
 use Pimple\Exception\ExpectedInvokableException;
 use Pimple\Exception\FrozenServiceException;
@@ -14,7 +15,6 @@ use Poppables\Exception\FrozenService;
 use Poppables\Exception\InvalidServiceIdentifier;
 use Poppables\Exception\UnknownIdentifier;
 use Psr\Container\ContainerInterface;
-use RuntimeException;
 
 final class Container implements ContainerInterface
 {
@@ -23,7 +23,7 @@ final class Container implements ContainerInterface
     public function __construct(array $values = [])
     {
         if (array_key_exists(ContainerInterface::class, $values)) {
-            throw new RuntimeException('@todo');
+            throw new InvalidArgumentException('Values array must not contain an entry for ' . ContainerInterface::class);
         }
 
         $this->pimple = new PimpleContainer($values);

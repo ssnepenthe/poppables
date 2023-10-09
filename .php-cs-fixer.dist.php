@@ -15,6 +15,6 @@ return (new Config())
             ->in(__DIR__)
             ->exclude([
                 'scratch',
-                'tests/fixtures',
+                'tests/Fixtures',
             ])
     );

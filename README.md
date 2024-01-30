@@ -15,7 +15,7 @@ It is probably best to start by familiarizing yourself with the [pimple document
 First we create a container instance:
 
 ```php
-use Poppable\Container;
+use Poppables\Container;
 
 $container = new Container();
 ```
